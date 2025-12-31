@@ -1,0 +1,6 @@
+{
+  "/not-found": "app/not-found.js",
+  "/submit-promise/page": "app/submit-promise/page.js",
+  "/page": "app/page.js",
+  "/about/page": "app/about/page.js"
+}

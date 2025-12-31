@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System - Design Tokens */
+
+:root {
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  /* Primary Color - Dark Neutral */
+  --color-primary-50: #fafafa;
+  --color-primary-100: #f5f5f5;
+  --color-primary-200: #e5e5e5;
+  --color-primary-300: #d4d4d4;
+  --color-primary-400: #a3a3a3;
+  --color-primary-500: #737373;
+  --color-primary-600: #525252;
+  --color-primary-700: #404040;
+  --color-primary-800: #262626;
+  --color-primary-900: #171717;
+
+  /* Accent Color - Subtle Red/Orange for Accountability */
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-200: #fecaca;
+  --color-accent-300: #fca5a5;
+  --color-accent-400: #f87171;
+  --color-accent-500: #dc2626;
+  --color-accent-600: #b91c1c;
+  --color-accent-700: #991b1b;
+  --color-accent-800: #7f1d1d;
+  --color-accent-900: #450a0a;
+
+  /* Dark Neutral Surfaces - Default Theme */
+  --color-background: #0f0f0f;
+  --color-foreground: #f5f5f5;
+  --color-surface: #1a1a1a;
+  --color-surface-elevated: #252525;
+  --color-border: #2a2a2a;
+  --color-border-muted: #1f1f1f;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Light Mode - Still restrained with dark neutrals */
+    --color-background: #fafafa;
+    --color-foreground: #171717;
+    --color-surface: #ffffff;
+    --color-surface-elevated: #f5f5f5;
+    --color-border: #e5e5e5;
+    --color-border-muted: #f0f0f0;
+  }
+}
+
+/* Base Styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Improve touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Touch-friendly tap targets */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
+  }
+
+  /* Typography Scale - Clean and Professional */
+  h1 {
+    @apply text-4xl font-semibold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold tracking-tight;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    @apply text-2xl font-medium tracking-tight;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    @apply text-xl font-medium tracking-tight;
+  }
+
+  h5 {
+    @apply text-lg font-medium;
+  }
+
+  h6 {
+    @apply text-base font-medium;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+    letter-spacing: 0;
+  }
+
+  /* Focus Styles - Subtle and Restrained */
+  *:focus-visible {
+    @apply outline-none ring-1 ring-accent-600 ring-offset-1 ring-offset-background;
+  }
+}
+
+/* Component Utilities */
+@layer utilities {
+  /* Surface Utilities */
+  .surface {
+    @apply bg-surface border border-border;
+  }
+
+  .surface-elevated {
+    @apply bg-surface-elevated border border-border;
+  }
+
+
+  /* Border Utilities */
+  .border-subtle {
+    @apply border-border-muted;
+  }
+
+  /* Screen Reader Only - Accessible but visually hidden */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only-focusable:focus,
+  .sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Focus visible improvements */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-background;
+  }
+
+  /* Ensure sufficient color contrast for text */
+  .text-muted {
+    @apply text-primary-600;
+  }
+
+  .text-subtle {
+    @apply text-primary-500;
+  }
+
+  /* Animation Utilities - Subtle and Restrained */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .animate-fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Motion-safe utilities - only apply transform when motion is safe */
+  @media (prefers-reduced-motion: no-preference) {
+    .motion-safe\:hover\:-translate-y-1:hover {
+      transform: translateY(-0.25rem);
+    }
+  }
+
+  .motion-reduce\:transition-none {
+    transition: none;
+  }
+}
+
