@@ -20,7 +20,7 @@ export async function createPromise(
  */
 export async function fetchPublicPromises(
   page: number = 1,
-  limit: number = 20
+  limit: number = 25
 ): Promise<PublicPromisesResponse> {
   const response = await apiClient.get<PublicPromisesResponse>(
     '/api/promises/public',
