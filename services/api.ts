@@ -6,7 +6,7 @@ import type {
 } from '@/types/api'
 
 /**
- * Create a new promise report test change
+ * Create a new promise report 
  */
 export async function createPromise(
   data: CreatePromiseRequest
